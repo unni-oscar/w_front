@@ -5,7 +5,8 @@ import App from './App'
 import router from './router'
 import {store} from './store'
 import axios from './backend/vue-axios'
-
+import VeeValidate from 'vee-validate'
+Vue.use(VeeValidate)
 Vue.config.productionTip = false
 
 // Setting the baseUrl for all the requests
