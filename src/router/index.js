@@ -6,6 +6,10 @@ import About from '../components/About'
 import Profile from '../components/Profile'
 import Contact from '../components/Contact'
 import Login from '../components/auth/Login'
+import Register from '../components/auth/Register'
+import RegisterSuccess from '../components/auth/RegisterSuccess'
+
+import PageNotFound from '../components/PageNotFound'
 
 Vue.use(Router)
 
@@ -51,6 +55,17 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
-    }
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
+    },
+    {
+      path: '/register-success',
+      name: 'RegisterSuccess',
+      component: RegisterSuccess
+    },
+    { path: '*', name: 'PageNotFound', component: PageNotFound }
   ]
 })

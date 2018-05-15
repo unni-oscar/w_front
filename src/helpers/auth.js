@@ -19,7 +19,7 @@ export function getCurrentUser () {
 export function login (credentials) {
   return new Promise((resolve, reject) => {
     axios.post(
-      '/user/signin',
+      '/login',
       credentials)
       .then(resp => {
         resolve(resp.data)
@@ -27,6 +27,24 @@ export function login (credentials) {
       .catch(err => {
         localStorage.removeItem('current-user')
         localStorage.removeItem('token')
+        reject(err)
+      })
+  })
+}
+
+/**
+ *
+ * @param {*} credentials
+ */
+export function register (credentials) {
+  return new Promise((resolve, reject) => {
+    axios.post(
+      '/register',
+      credentials)
+      .then(resp => {
+        resolve(resp.data)
+      })
+      .catch(err => {
         reject(err)
       })
   })

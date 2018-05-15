@@ -1,3 +1,4 @@
+
 # working
 
 > A Vue.js project
@@ -6,7 +7,7 @@
 
 ``` bash
 
-npm install --save jwt-decode axios vuex vue-axios
+npm install --save jwt-decode axios vuex vue-axios jquery
 
 
 # install dependencies

@@ -15,7 +15,7 @@
                 <li><router-link to="/contact">Contact Us</router-link></li>
                 <li v-if="!isLoggedIn"><router-link to="/login">Login</router-link></li>
                 <li v-if="isLoggedIn"><a  href="#" v-on:click="logout">Logout</a></li>
-                <li v-if="!isLoggedIn"><router-link to="/signup">Register</router-link></li>
+                <li v-if="!isLoggedIn"><router-link to="/register">Register</router-link></li>
                 <li><router-link to="/user">Dashboard</router-link></li>
             </ul>
         </div><!-- /.navbar-collapse -->

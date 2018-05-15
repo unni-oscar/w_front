@@ -2,10 +2,10 @@
 
   <div class='mt-4 col-8 offset2'>
     <div class='card'>
-      <div class='card-header'>Login</div>
+      <div class='card-header'>Register</div>
       <div class='card-body'>
         <form @submit.prevent="validateBeforeSubmit">
-            <p class="text-danger" v-if="isAuthError">{{ isAuthError }}</p>
+            <p class="text-danger" v-if="error">{{ error }}</p>
             <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
@@ -23,7 +23,7 @@
 
               <div class="form-group row">
                 <div class="col-sm-10">
-                  <button type="submit" class="btn btn-primary">Login</button>
+                  <button type="submit" class="btn btn-primary">Sign Up</button>
                 </div>
               </div>
         </form>
@@ -34,9 +34,10 @@
 </template>
 
 <script>
-import { login } from '../../helpers/auth'
+import { register } from '../../helpers/auth'
+import $ from 'jquery'
 export default {
-  name: 'Login',
+  name: 'Register',
   computed: {
     isAuthError () {
       return this.error
@@ -52,20 +53,28 @@ export default {
   methods: {
     validateBeforeSubmit () {
       this.$validator.validateAll().then((result) => {
-        console.log(result)
         if (result) {
-          this.$store.dispatch('login')
-          login({email: this.email, password: this.password})
-            .then((res) => {
-              this.$store.commit('loginSuccess', res)
-              this.$router.replace(this.$route.query.redirect || '/user')
-            })
-            .catch((error) => {
-              this.$store.commit('loginFailed', {error})
-              this.error = error.response.data.error
-            })
+          this.doRegister()
         }
       })
+    },
+    doRegister () {
+      const app = this
+      // Start: Register section
+      register({ email: this.email, password: this.password })
+        .then((res) => {
+          this.$router.push('/register-success')
+        })
+        .catch((error) => {
+          if (error.response.status === 422 && typeof error.response.data === 'object' && error.response.data) {
+            $.each(error.response.data.errors, function (field, messages) {
+              app.errors.add(field, messages[0])
+            })
+          } else if (error.response.status === 500 && error.response.data.success === false) {
+            this.error = error.response.data.message
+          }
+        })
+        // End: Register section
     }
   }
 }

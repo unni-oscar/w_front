@@ -1,0 +1,12 @@
+May 6 2018 :  
+
+First based commit
+- Login
+- Logout
+- Redirect to the same page after login 
+- Vee validate validate implemented
+- route that require authenticate will ask for login
+- Page not found
+- Switching Layout
+- Showing Login , register and logout based on the authentication
+
